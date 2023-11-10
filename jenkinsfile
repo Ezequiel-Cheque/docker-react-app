@@ -12,20 +12,20 @@ pipeline {
             steps {
                 script {
                     try {
-                        sh "docker stop ${container_name}"
-                        sh "docker rm ${container_name}"
-                        sh "docker rmi ${image_name}"
+                        sh 'docker stop ${container_name}'
+                        sh 'docker rm ${container_name}'
+                        sh 'docker rmi ${image_name}'
                     } catch (Exception e) {
                         echo "Exception occurred: " + e.toString()
                     }
                 }
-                sh "docker build -t ${image_name} ."
+                sh 'docker build -t ${image_name} .'
             }
         }
 
         stage("deploy") {
             steps {
-                sh "docker run -dp ${container_port}:80 --name ${container_name} ${image_name}"
+                sh 'docker run -dp ${container_port}:80 --name ${container_name} ${image_name}'
             }
         }
     }
