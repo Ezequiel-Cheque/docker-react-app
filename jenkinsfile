@@ -8,14 +8,15 @@ pipeline {
         stage("list") {
             steps {
                 sh 'ls'
+                sh 'docker --version'
             }
         }
-        
-        // stage("review") {
-        //     steps {
-        //         sh 'docker image ls'
-        //     }
-        // }
+
+        stage("build") {
+            steps {
+                sh 'docker image ls'
+            }
+        }
 
     }
 
