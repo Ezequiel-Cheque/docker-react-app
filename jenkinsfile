@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    tools {
+        docker "docker"
+    }
+
     parameters {
         string(name: "container_name", defaultValue: "heroes-app", description: "Nombre del contenedor de docker")
         string(name: "image_name", defaultValue: "heroes-app", description: "Nombre de la imagen de docker")
