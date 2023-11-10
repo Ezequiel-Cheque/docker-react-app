@@ -8,11 +8,13 @@ pipeline {
     }
 
     stages {
+
         stage("test") {
             steps {
                 sh 'docker images'
             }
-        }0
+        }
+        
     }
 
 }
