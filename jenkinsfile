@@ -1,24 +1,17 @@
 pipeline {
-    
-    
-    parameters {
-        string(name: "container_name", defaultValue: "heroes-app", description: "Nombre del contenedor de docker")
-        string(name: "image_name", defaultValue: "heroes-app", description: "Nombre de la imagen de docker")
-        string(name: "container_port", defaultValue: "3000", description: "Puerto de docker")
-    }
-    
+
     agent {
         dockerfile {
-            filename '${image_name}'
+            filename 'Dockerfile.build'
+            label 'my-defined-label'
+            additionalBuildArgs  '--build-arg version=1.0.2'
         }
     }
 
-
     stages {
-
-        stage("deploy") {
+        stage("test") {
             steps {
-                sh 'docker run -dp ${container_port}:80 --name ${container_name} ${image_name}'
+                sh 'docker images'
             }
         }
     }
