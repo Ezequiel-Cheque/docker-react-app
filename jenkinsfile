@@ -1,10 +1,31 @@
 pipeline {
     agent any
 
+    parameters {
+        string(name: "container_name", defaultValue: "heroes-app", description: "Nombre del contenedor de docker")
+        string(name: "image_name", defaultValue: "heroes-app", description: "Nombre de la imagen de docker")
+        string(name: "container_port", defaultValue: "3000", description: "Puerto de docker")
+    }
+
     stages {
-        stage("hello2") {
+        stage("build") {
             steps {
-                echo 'Hello World automatically!!'
+                script {
+                    try {
+                        sh "docker stop ${container_name}"
+                        sh "docker rm ${container_name}"
+                        sh "docker rmi ${image_name}"
+                    } catch {
+                        echo "Exception occurred: " + e.toString()
+                    }
+                }
+                sh "docker build -t ${image_name} ."
+            }
+        }
+
+        stage("deploy") {
+            steps {
+                sh "docker run -dp ${container_port}:80 --name ${container_name} ${image_name}"
             }
         }
     }
