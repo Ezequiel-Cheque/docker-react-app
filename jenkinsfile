@@ -5,21 +5,9 @@ pipeline {
 
     stages {
 
-        stage("build") {
-            steps {
-                agent {
-                    dockerfile {
-                        filename 'Dockerfile'
-                        additionalBuildArgs '-t my_image'
-                    }
-                }
-            }
-        }
-
         stage("test") {
             steps {
-                sh 'cd /usr/share/nginx/html'
-                sh 'ls'
+                sh 'docker --version'
             }
         }
 
