@@ -15,7 +15,7 @@ pipeline {
                         sh "docker stop ${container_name}"
                         sh "docker rm ${container_name}"
                         sh "docker rmi ${image_name}"
-                    } catch {
+                    } catch (Exception e) {
                         echo "Exception occurred: " + e.toString()
                     }
                 }
