@@ -2,10 +2,6 @@ pipeline {
 
     agent any
 
-    tools {
-        docker 'docker'
-    }
-
     stages {
 
         stage("list") {
@@ -17,7 +13,9 @@ pipeline {
 
         stage("build") {
             steps {
-                sh 'docker image ls'
+                script {
+                    sh 'docker image ls'
+                }
             }
         }
 
