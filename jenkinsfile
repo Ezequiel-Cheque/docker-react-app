@@ -1,0 +1,29 @@
+pipeline {
+    agent any
+
+    echo 'Hola mundo'
+    
+    // tools {
+    //     Docker "docker"
+    // }
+
+    // parameters {
+    //     string(name: "container_name", defaultValue: "pagina_web", description: "Nombre del contenedor de docker")
+    //     string(name: "image_name", defaultValue: "Nombre de la imagen de docker")
+    //     string(name: "tag_image", defaultValue: "lts", description: "Tag de la imagen de la pagina")
+    // }
+
+    stages {
+    //     stage("build") {
+    //         dir("") {
+    //             sh "docker build -t heroes-app ."
+    //         }
+    //     }
+
+    //     stage("run") {
+    //         dir("") {
+    //             sh "docker container run -dp 3000:80 heroes-app"
+    //         }
+    //     }
+    // }
+}
