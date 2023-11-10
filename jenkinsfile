@@ -1,20 +1,27 @@
 pipeline {
 
-    agent {
-        dockerfile {
-            filename 'Dockerfile.build'
-            additionalBuildArgs  '--build-arg version=1.0.2'
-        }
-    }
+    agent any
+
 
     stages {
+
+        stage("build") {
+            steps {
+                agent {
+                    dockerfile {
+                        filename 'Dockerfile'
+                        additionalBuildArgs '-t my_image'
+                    }
+                }
+            }
+        }
 
         stage("test") {
             steps {
                 sh 'docker images'
             }
         }
-        
+
     }
 
 }
