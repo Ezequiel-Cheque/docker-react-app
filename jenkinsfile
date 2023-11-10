@@ -1,18 +1,20 @@
 pipeline {
-    agent any
-
+    
+    
     parameters {
         string(name: "container_name", defaultValue: "heroes-app", description: "Nombre del contenedor de docker")
         string(name: "image_name", defaultValue: "heroes-app", description: "Nombre de la imagen de docker")
         string(name: "container_port", defaultValue: "3000", description: "Puerto de docker")
     }
+    
+    agent {
+        dockerfile {
+            filename '${image_name}'
+        }
+    }
+
 
     stages {
-        stage("build") {
-            steps {
-                sh 'docker build -t ${image_name} .'
-            }
-        }
 
         stage("deploy") {
             steps {
